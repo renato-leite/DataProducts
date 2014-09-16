@@ -1,0 +1,97 @@
+---
+title       : 1987 Baseball Season
+subtitle    : Results Summary
+author      : Renato Leite
+job         : Whatever
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap, quiz, shiny, interactive]           
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+ext_widgets : {rCharts: [libraries/polycharts]}
+---
+
+## Objective
+
+The app is used to summarize baseball results for games in the 1987 season between 7 teams in the Eastern Division of the American League.
+
+This data is avauable in the package BradleyTerry2
+
+Source:
+Page 438 of Agresti, A. (2002) Categorical Data Analysis (2nd Edn.). New York: Wiley.
+
+--- .class #id 
+
+## What it Does
+
+<small>The App does simple operations just to filter some results according to the users interest, first it filters the data, creating a data set only with the games which the home team is the one selected by the user, like in this exemple:
+
+```{r, message=FALSE, echo=FALSE}
+library(BradleyTerry2)
+library(rCharts)
+library(xtable)
+```
+
+```{r}
+H.team = "Boston"
+A.team = "New York"
+team.A.home = subset(baseball, baseball$home.team == H.team)
+AxB =  subset(team.A.home, team.A.home$away.team == A.team)
+names(team.A.home) = c("Home Team" , "Away Team", "Home Team Wins", "Home Team Losses")
+```
+
+```{r table, results = 'asis', comment = NA, echo = F}
+options(xtable.type = 'html')
+xtable(team.A.home)
+```
+</small>
+
+---
+
+## Plotting
+
+<small>
+With the first filter created, the App goes for the away team selected by the user. Selects the right line to creat a bar plot comparing the wins of the teams.
+
+```{r, print=FALSE}
+      AvsB = rbind(c(H.team,as.numeric(AxB[3])), c(A.team,as.numeric(AxB[4])))
+      AvsB = as.data.frame(AvsB)
+      names(AvsB) = c("Team","Wins")
+      p = rPlot(x = "Team", y = "Wins", data = AvsB, type = 'bar')
+      #p$addParams(dom = 'barPlot')
+```
+</small>
+
+
+---
+
+## Result
+
+The last code creats this plot from rCharts that can show if the home team is in advantage.
+
+```{r, results = 'asis', echo=F}
+       #p$print('barPlot', include_assets = TRUE, cdn = TRUE)
+       p
+```
+
+The github with the codes can be foud on [github](http://github.com)
+
+---
+
+## Interativo
+ 
+ 
+```{r results = 'asis', echo=F}
+require(rCharts)
+a <- Highcharts$new()
+a$title(text = "Fruits")
+a$data(x = c("Apples","Bananas","Oranges"), y = c(15, 20, 30), type = "pie", name = "Amount")
+a$print('mychart4', include_assets = TRUE, cdn = TRUE)
+```
+
+
+
+
+
+
