@@ -77,21 +77,6 @@ The last code creats this plot from rCharts that can show if the home team is in
 
 The github with the codes can be foud on [github](http://github.com)
 
----
-
-## Interativo
- 
- 
-```{r results = 'asis', echo=F}
-require(rCharts)
-a <- Highcharts$new()
-a$title(text = "Fruits")
-a$data(x = c("Apples","Bananas","Oranges"), y = c(15, 20, 30), type = "pie", name = "Amount")
-a$print('mychart4', include_assets = TRUE, cdn = TRUE)
-```
-
-
-
 
 
 
