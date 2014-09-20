@@ -1,4 +1,4 @@
-library(shinyapps)
+library(shilibrary(shinyapps)
 library(rCharts)
 library(shiny)
 require(devtools)
@@ -70,7 +70,8 @@ shinyUI(
         
         selectInput("A.team", "Away Team:", 
                                 choices=levels(baseball$home.team),
-                                selected = levels(baseball$home.team[2]))
+                                selected = levels(baseball$home.team[2])),
+        textOutput("text3")
       
        ),  
        
