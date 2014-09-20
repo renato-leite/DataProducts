@@ -79,6 +79,13 @@ shinyServer(  function(input, output) {
       paste("Games that the", input$H.team, "played as home team")
     })
     
+    output$text3 <- renderText({ 
+      paste("Choose a Home Team and a Away Team. This app will show you a table with the results os the first team playing at home, plus a nice graph with the results of the games betwen the two selected teams"
+            , input$H.team, "played as home team")
+    })
+
+
+
     output$view <- renderTable({
       team.A.home = subset(baseball, baseball$home.team == input$H.team)
       names(team.A.home) = c("Home Team" , "Away Team", "Home Team Wins", "Home Team Losses")
